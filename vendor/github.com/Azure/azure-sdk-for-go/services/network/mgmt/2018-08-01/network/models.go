@@ -25152,6 +25152,8 @@ type VirtualNetworkGatewayPropertiesFormat struct {
 	VpnClientConfiguration *VpnClientConfiguration `json:"vpnClientConfiguration,omitempty"`
 	// BgpSettings - Virtual network gateway's BGP speaker settings.
 	BgpSettings *BgpSettings `json:"bgpSettings,omitempty"`
+	// ExpressRouteGatewayBypass - traffic can bypass the gateway.
+	ExpressRouteGatewayBypass *bool `json:"expressRouteGatewayBypass,omitempty"`
 	// ResourceGUID - The resource GUID property of the VirtualNetworkGateway resource.
 	ResourceGUID *string `json:"resourceGuid,omitempty"`
 	// ProvisioningState - The provisioning state of the VirtualNetworkGateway resource. Possible values are: 'Updating', 'Deleting', and 'Failed'.

@@ -219,7 +219,11 @@ func resourceArmVirtualNetworkGatewayConnection() *schema.Resource {
 					},
 				},
 			},
-
+			"express_route_gateway_bypass": {
+				Type:     schema.TypeBool,
+				Optional: true,
+				Computed: true,
+			},
 			"tags": tagsSchema(),
 		},
 	}
@@ -358,6 +362,10 @@ func resourceArmVirtualNetworkGatewayConnectionRead(d *schema.ResourceData, meta
 		}
 	}
 
+	if conn.ExpressRouteGatewayBypass != nil {
+		d.Set("express_route_gateway_bypass", conn.ExpressRouteGatewayBypass)
+	}
+
 	flattenAndSetTags(d, resp.Tags)
 
 	return nil
@@ -391,6 +399,7 @@ func getArmVirtualNetworkGatewayConnectionProperties(d *schema.ResourceData) (*n
 		ConnectionType:                 connectionType,
 		EnableBgp:                      utils.Bool(d.Get("enable_bgp").(bool)),
 		UsePolicyBasedTrafficSelectors: utils.Bool(d.Get("use_policy_based_traffic_selectors").(bool)),
+		ExpressRouteGatewayBypass:      utils.Bool(d.Get("express_route_gateway_bypass").(bool)),
 	}
 
 	if v, ok := d.GetOk("virtual_network_gateway_id"); ok {

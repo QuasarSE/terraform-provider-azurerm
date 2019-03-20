@@ -180,6 +180,12 @@ func dataSourceArmVirtualNetworkGateway() *schema.Resource {
 				Computed: true,
 			},
 
+			"express_route_gateway_bypass": {
+				Type:     schema.TypeBool,
+				Optional: true,
+				Computed: true,
+			},
+
 			"tags": tagsForDataSourceSchema(),
 		},
 	}
@@ -215,6 +221,7 @@ func dataSourceArmVirtualNetworkGatewayRead(d *schema.ResourceData, meta interfa
 		d.Set("type", string(gw.GatewayType))
 		d.Set("enable_bgp", gw.EnableBgp)
 		d.Set("active_active", gw.ActiveActive)
+		d.Set("express_route_gateway_bypass", gw.ExpressRouteGatewayBypass)
 
 		if string(gw.VpnType) != "" {
 			d.Set("vpn_type", string(gw.VpnType))
